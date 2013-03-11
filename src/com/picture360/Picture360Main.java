@@ -18,6 +18,7 @@ import android.widget.TextView;
 public class Picture360Main extends Activity {
 	
 	private CameraPreview _cameraPreview;
+	private FrameLayout _preview;
 	
 
 	@Override
@@ -27,8 +28,8 @@ public class Picture360Main extends Activity {
 		setContentView(R.layout.activity_picture360_main);
 		
 		_cameraPreview = new CameraPreview(this);
-        FrameLayout preview = (FrameLayout)findViewById(R.id.frameCameraPreview); 
-        preview.addView(_cameraPreview);
+        _preview = (FrameLayout)findViewById(R.id.frameCameraPreview); 
+        _preview.addView(_cameraPreview);
 	}
 	
 
@@ -62,6 +63,9 @@ public class Picture360Main extends Activity {
 	            imageFileOS.close();
 	            
 	            ((TextView)findViewById(R.id.textImagePath)).setText(uriTarget.getPath());
+	            _preview.removeAllViews();
+	            _preview.addView(_cameraPreview);
+	            
 	            
 	            
 //	            Bitmap imageBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uriTarget));
